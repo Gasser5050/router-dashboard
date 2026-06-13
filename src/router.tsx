@@ -2,17 +2,17 @@ import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import Home from "./pages/Home";
 import PostsList from "./pages/PostsList";
-import Post from "./pages/Post";
+import PostInfo from "./pages/PostInfo";
 import UsersList from "./pages/UsersList";
-import User from "./pages/User";
+import UserInfo from "./pages/UserInfo";
 import Todos from "./pages/Todos";
 import Error from "./pages/Error";
+import ErrorPage from "./pages/ErrorPage";
 import { postsLoader } from "./loaders/postsLoader";
 import { postLoader } from "./loaders/postLoader";
 import { usersLoader } from "./loaders/usersLoader";
 import { userLoader } from "./loaders/userLoader";
 import { todosLoader } from "./loaders/todosLoader";
-import ErrorPage from "./pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ":postId",
-                element: <Post />,
+                element: <PostInfo />,
                 id: "post-loader",
                 loader: postLoader
               }
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
               },
               {
                 path: ":userId",
-                element: <User />,
+                element: <UserInfo />,
                 id: "user-loader",
                 loader: userLoader
               }

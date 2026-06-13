@@ -1,9 +1,9 @@
 import { NavLink, useRouteLoaderData } from "react-router-dom";
-import type { User, UserPage } from "../types/Types";
+import type { UserPage } from "../types/Types";
 import Todos from "./Todos";
 import PostsList from "./PostsList";
 
-function User() {
+function UserInfo() {
   const userPage = useRouteLoaderData<UserPage>("user-loader");
   if (!userPage) return;
 
@@ -54,4 +54,4 @@ function User() {
   );
 }
 
-export default User;
+export default UserInfo;

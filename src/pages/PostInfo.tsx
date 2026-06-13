@@ -1,7 +1,7 @@
 import { NavLink, useRouteLoaderData } from "react-router-dom";
-import type { Post, PostPage } from "../types/Types";
+import type { PostPage } from "../types/Types";
 
-function Post() {
+function PostInfo() {
   const pageData = useRouteLoaderData<PostPage>("post-loader");
   if (!pageData) return;
 
@@ -42,4 +42,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default PostInfo;
