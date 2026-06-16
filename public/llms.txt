@@ -1,0 +1,9 @@
+# Router Dashboard
+
+An advanced dashboard application built with React Router, Vite, and Axios for tracking tracking logs, managing global user directories, and organizing synchronized personal task itineraries.
+
+## Endpoints
+
+- [Posts](https://router-dashboard-ochre.vercel.app/posts): View public developer text updates and system comment logs.
+- [Users](https://router-dashboard-ochre.vercel.app/users): Comprehensive global profiles, company descriptions, and address directories.
+- [Todos](https://router-dashboard-ochre.vercel.app/todos): Interactive, query-filtered task checklists synced to persistent data arrays.
