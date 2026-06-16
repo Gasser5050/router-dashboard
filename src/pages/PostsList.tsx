@@ -15,7 +15,7 @@ function PostsList({
   return (
     <>
       {!hideTitle && (
-        <h1 className="text-5xl font-bold mb-12 text-[hsl(200,100%,10%)] tracking-tight">
+        <h1 className="text-4xl lg:text-5xl font-bold mb-12 text-[hsl(200,100%,10%)] tracking-tight">
           Posts
         </h1>
       )}

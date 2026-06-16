@@ -8,7 +8,7 @@ function UsersList() {
 
   return (
     <>
-      <h1 className="font-bold text-5xl mb-10 text-[hsl(200,100%,10%)] tracking-tight">
+      <h1 className="font-bold text-4xl lg:text-5xl mb-10 text-[hsl(200,100%,10%)] tracking-tight">
         Users
       </h1>
 

@@ -38,7 +38,7 @@ export type Post = {
 };
 
 export type Todo = {
-  id: number;
+  id: `${string}-${string}-${string}-${string}-${string}`;
   userId: number;
   title: string;
   completed: boolean;

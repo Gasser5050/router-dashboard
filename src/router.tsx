@@ -13,6 +13,9 @@ import { postLoader } from "./loaders/postLoader";
 import { usersLoader } from "./loaders/usersLoader";
 import { userLoader } from "./loaders/userLoader";
 import { todosLoader } from "./loaders/todosLoader";
+import Navbar from "./components/Navbar";
+import NewTodo from "./pages/NewTodo";
+import { postNewTodo } from "./actions/postNewTodo";
 
 export const router = createBrowserRouter([
   {
@@ -59,9 +62,22 @@ export const router = createBrowserRouter([
           },
           {
             path: "/Todos",
-            element: <Todos />,
-            id: "todos-loader",
-            loader: todosLoader
+            children: [
+              {
+                index: true,
+                element: <Todos />,
+                id: "todos-loader",
+                loader: todosLoader,
+                shouldRevalidate: ({ currentUrl, nextUrl }) => {
+                  return currentUrl.pathname !== nextUrl.pathname;
+                }
+              },
+              {
+                path: "new",
+                element: <NewTodo />,
+                action: postNewTodo
+              }
+            ]
           },
           { path: "*", element: <Error /> }
         ]
@@ -69,9 +85,12 @@ export const router = createBrowserRouter([
     ],
     HydrateFallback: () => {
       return (
-        <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/10">
-          <div className="w-25 h-25 border-5 border-[hsl(200,100%,10%)] border-t-transparent rounded-full animate-spin" />
-        </div>
+        <>
+          <Navbar />
+          <div className="fixed inset-0 z-10 flex items-center justify-center bg-black/10">
+            <div className="w-25 h-25 border-5 border-[hsl(200,100%,10%)] border-t-transparent rounded-full animate-spin" />
+          </div>
+        </>
       );
     }
   }
