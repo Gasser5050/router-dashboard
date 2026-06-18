@@ -68,7 +68,7 @@ function PostsList({
                 type="search"
                 defaultValue={query}
                 key={query}
-                autofocus
+                autoFocus
                 className="border bg-white px-2 py-1 rounded-lg"
               />
             </div>
