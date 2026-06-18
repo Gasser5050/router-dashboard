@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     const response = await axios.post(
-      "https://jsonplaceholder.typicode.com/todos",
+      "https://jsonplaceholder.cypress.io/todos",
       body,
       {
         timeout: 5000

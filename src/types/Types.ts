@@ -31,8 +31,8 @@ type Company = {
 };
 
 export type Post = {
-  id: number;
-  userId: number;
+  id: `${string}-${string}-${string}-${string}-${string}`;
+  userId: number | string;
   title: string;
   body: string;
 };

@@ -6,7 +6,7 @@ export async function GET(request: Request) {
 
   try {
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/todos",
+      "https://jsonplaceholder.cypress.io/todos",
       {
         params: Object.fromEntries(searchParams),
         timeout: 5000

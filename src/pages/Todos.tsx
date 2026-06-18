@@ -48,7 +48,7 @@ function Todos({
             </NavLink>
           </div>
 
-          <Form className="flex items-end space-x-4 mb-5 ">
+          <Form className="flex justify-center items-end space-x-4 mb-5 ">
             <div className="flex flex-col grow">
               <label htmlFor="query">Search</label>
               <input

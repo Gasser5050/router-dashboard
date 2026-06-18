@@ -10,7 +10,7 @@ function NewTodo() {
       <h1 className="text-4xl lg:text-5xl mb-6 font-bold text-[hsl(200,100%,10%)] tracking-tight">
         Add New Todo
       </h1>
-      <p>{errorMessage}</p>
+      {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
       <Form method="post">
         <div className="flex flex-col">
           <label

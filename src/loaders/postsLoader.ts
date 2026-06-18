@@ -2,10 +2,17 @@ import axios from "axios";
 
 export async function postsLoader({ request }: { request: Request }) {
   try {
-    const response = await axios.get("/api/grab-posts", {
+    const postsPromise = axios.get("/api/grab-posts", {
       signal: request.signal
     });
-    return response.data;
+
+    const usersPromise = axios.get("/api/grab-users", {
+      signal: request.signal
+    });
+
+    const [posts, users] = await Promise.all([postsPromise, usersPromise]);
+    
+    return { posts: posts.data, users: users.data };
   } catch (error) {
     if (axios.isCancel(error)) {
       console.log("Fetch safely canceled mid-flight.");

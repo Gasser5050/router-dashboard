@@ -1,20 +1,22 @@
 import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import PostsList from "./pages/PostsList";
 import PostInfo from "./pages/PostInfo";
+import NewPost from "./pages/NewPost";
 import UsersList from "./pages/UsersList";
 import UserInfo from "./pages/UserInfo";
 import Todos from "./pages/Todos";
+import NewTodo from "./pages/NewTodo";
 import Error from "./pages/Error";
 import ErrorPage from "./pages/ErrorPage";
 import { postsLoader } from "./loaders/postsLoader";
 import { postLoader } from "./loaders/postLoader";
+import { postNewPost } from "./actions/postNewPost";
 import { usersLoader } from "./loaders/usersLoader";
 import { userLoader } from "./loaders/userLoader";
 import { todosLoader } from "./loaders/todosLoader";
-import Navbar from "./components/Navbar";
-import NewTodo from "./pages/NewTodo";
 import { postNewTodo } from "./actions/postNewTodo";
 
 export const router = createBrowserRouter([
@@ -33,13 +35,26 @@ export const router = createBrowserRouter([
                 index: true,
                 element: <PostsList />,
                 id: "posts-loader",
-                loader: postsLoader
+                loader: postsLoader,
+                shouldRevalidate: ({ currentUrl, nextUrl }) => {
+                  return currentUrl.pathname !== nextUrl.pathname;
+                }
               },
               {
                 path: ":postId",
                 element: <PostInfo />,
                 id: "post-loader",
                 loader: postLoader
+              },
+              {
+                path: "new",
+                element: <NewPost />,
+                id: "new-todo-loader",
+                loader: usersLoader,
+                action: postNewPost,
+                shouldRevalidate: ({ currentUrl, nextUrl }) => {
+                  return currentUrl.pathname !== nextUrl.pathname;
+                }
               }
             ]
           },

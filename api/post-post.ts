@@ -1,20 +1,21 @@
 import axios from "axios";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   console.log("🟢 Backend triggered! URL is:", request.url);
-  const { searchParams } = new URL(request.url);
 
   try {
-    const response = await axios.get(
-      "https://jsonplaceholder.cypress.io/users",
+    const body = await request.json();
+
+    const response = await axios.post(
+      "https://jsonplaceholder.cypress.io/posts",
+      body,
       {
-        params: Object.fromEntries(searchParams),
         timeout: 5000
       }
     );
 
     return new Response(JSON.stringify(response.data), {
-      status: 200,
+      status: 201,
       headers: {
         "Content-Type": "application/json"
       }
@@ -26,10 +27,12 @@ export async function GET(request: Request) {
     if (axios.isAxiosError(error)) {
       errorStatus = error.response?.status || 500;
       errorMessage = error.response?.data?.message || error.message;
+      console.error(`❌ Backend Axios Error (${errorStatus}):`, errorMessage);
     } else if (error instanceof Error) {
       console.error(`Secure Server Log: ${error.message}`);
+      errorMessage = "Invalid JSON payload sent to server.";
+      errorStatus = 400;
     } else {
-      errorMessage = "An unexpected error occurred";
       console.error("Secure Server Log: An unknown error type was caught.");
     }
 
