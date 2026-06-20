@@ -8,7 +8,7 @@ function Navbar() {
           My App
         </NavLink>
 
-        <ul className="flex space-x-4 md:space-x-6">
+        <ul className="flex text-xl md:text-2xl space-x-2 md:space-x-4 lg:space-x-6">
           <li>
             <NavLink
               className={({ isActive }) =>
