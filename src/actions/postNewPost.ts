@@ -7,25 +7,26 @@ export async function postNewPost({ request }: { request: Request }) {
 
   const title = formData.get("title");
   if (!title || title === "" || typeof title !== "string")
-    return "Title must be a string";
+    return "A Title is required";
 
   const author = formData.get("author");
   if (!author || author === "" || typeof author !== "string")
-    return "author must be a string";
+    return "A specific author is required";
 
   const body = formData.get("body");
   if (!body || body === "" || typeof body !== "string")
-    return "body must be a string";
+    return "A body is required";
 
+  const uniqueId = crypto.randomUUID();
   const newPost: Post = {
-    id: crypto.randomUUID(),
-    userId: author,
+    id: uniqueId,
+    userId: Number(author),
     title,
     body
   };
 
   try {
-    const response = await axios.post("/api/post-todo", newPost, {
+    const response = await axios.post("/api/post-post", newPost, {
       signal: request.signal
     });
 
@@ -36,7 +37,7 @@ export async function postNewPost({ request }: { request: Request }) {
       JSON.stringify([...localPosts, response.data])
     );
 
-    return redirect("/posts");
+    return redirect(`/posts/${uniqueId}`);
   } catch (error) {
     if (axios.isCancel(error)) {
       console.log("Submission safely canceled mid-flight.");

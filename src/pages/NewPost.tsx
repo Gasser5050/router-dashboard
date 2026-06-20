@@ -5,20 +5,25 @@ import {
   useNavigation,
   useRouteLoaderData
 } from "react-router-dom";
-import type { User } from "../types/Types";
+import type { PostPage, User } from "../types/Types";
 
 function NewPost() {
   const errorMessage = useActionData();
   const { state } = useNavigation();
   const submitting = state === "loading" || state === "submitting";
 
-  const users = useRouteLoaderData<User[]>("new-todo-loader");
+  const currentPostDetails = useRouteLoaderData<PostPage>("post-loader");
+  const post = currentPostDetails?.post;
+
+  const newPostUsers = useRouteLoaderData<User[]>("new-post-loader");
+  const editPostUsers = useRouteLoaderData<User[]>("edit-post-loader");
+  const users = newPostUsers || editPostUsers;
   if (!users) return;
 
   return (
     <>
       <h1 className="text-4xl lg:text-5xl mb-4 font-bold text-[hsl(200,100%,10%)] tracking-tight">
-        Add New Post
+        {post ? `Edit Post: ${post.title}` : "Add New Post"}
       </h1>
       <p
         className={`-ml-1 opacity-0 text-red-500 mb-1 ${errorMessage ? "opacity-100" : ""}`}
@@ -37,6 +42,7 @@ function NewPost() {
               type="text"
               name="title"
               id="title"
+              defaultValue={post && post.title}
               autoFocus
               required
               className="border bg-white px-2 py-1 lg:py-1.5 rounded-md"
@@ -49,6 +55,7 @@ function NewPost() {
             <select
               name="author"
               id="author"
+              defaultValue={post ? post.userId : ""}
               className="border bg-white px-2 py-1 lg:py-1.5 rounded-md"
             >
               <option value="">Any</option>
@@ -71,6 +78,7 @@ function NewPost() {
               rows={5}
               required
               className="border bg-white px-2 py-1 lg:py-1.5 rounded-md scrollbar-none"
+              defaultValue={post && post.body}
             />
           </div>
         </fieldset>
@@ -90,7 +98,7 @@ function NewPost() {
             disabled={submitting}
             className={`bg-[hsl(200,100%,30%)] text-white border px-2 py-1 rounded-sm cursor-pointer hover:scale-105 ${submitting ? "bg-gray-500 text-white" : ""}`}
           >
-            Create
+            {post ? "Edit" : "Create"}
           </button>
         </div>
       </Form>

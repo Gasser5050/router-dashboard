@@ -16,7 +16,7 @@ function AppLayout() {
       )}
 
       <main
-        className={`container max-w-6xl mx-auto px-8 md:px-12 lg:px-8 xl:px-0 pt-8 grow ${state === "loading" ? "blur-sm" : ""}`}
+        className={`container mx-auto px-8 md:px-6 lg:px-12 pt-10 md:pt-12 lg:pt-15 grow ${state === "loading" ? "blur-sm" : ""}`}
       >
         <Outlet />
       </main>

@@ -14,6 +14,7 @@ import ErrorPage from "./pages/ErrorPage";
 import { postsLoader } from "./loaders/postsLoader";
 import { postLoader } from "./loaders/postLoader";
 import { postNewPost } from "./actions/postNewPost";
+import { editPostAction } from "./actions/editPostAction";
 import { usersLoader } from "./loaders/usersLoader";
 import { userLoader } from "./loaders/userLoader";
 import { todosLoader } from "./loaders/todosLoader";
@@ -42,19 +43,28 @@ export const router = createBrowserRouter([
               },
               {
                 path: ":postId",
-                element: <PostInfo />,
                 id: "post-loader",
-                loader: postLoader
+                loader: postLoader,
+                children: [
+                  {
+                    index: true,
+                    element: <PostInfo />
+                  },
+                  {
+                    path: "edit",
+                    element: <NewPost />,
+                    id: "edit-post-loader",
+                    loader: usersLoader,
+                    action: editPostAction
+                  }
+                ]
               },
               {
                 path: "new",
                 element: <NewPost />,
-                id: "new-todo-loader",
+                id: "new-post-loader",
                 loader: usersLoader,
-                action: postNewPost,
-                shouldRevalidate: ({ currentUrl, nextUrl }) => {
-                  return currentUrl.pathname !== nextUrl.pathname;
-                }
+                action: postNewPost
               }
             ]
           },
