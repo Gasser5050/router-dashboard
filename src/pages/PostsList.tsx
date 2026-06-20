@@ -59,8 +59,8 @@ function PostsList({
               New
             </NavLink>
           </div>
-          <Form className="flex justify-center items-end space-x-2 lg:space-x-4 mb-5">
-            <div className="flex flex-col grow">
+          <Form className="flex flex-col md:flex-row justify-center items-center md:items-end space-y-3 md:space-y-0 md:space-x-2 lg:space-x-4 mb-5">
+            <div className="flex flex-col w-full md:grow">
               <label htmlFor="query">Query</label>
               <input
                 id="query"
@@ -72,7 +72,7 @@ function PostsList({
                 className="border bg-white px-2 py-1 rounded-lg"
               />
             </div>
-            <div className="flex flex-col w-1/2 md:w-1/3">
+            <div className="flex flex-col w-full md:w-1/3">
               <label htmlFor="author">Author</label>
               <select
                 id="author"
